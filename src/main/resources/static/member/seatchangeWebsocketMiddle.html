@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SeatChoose</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="css/seatChoose.css" type="text/css" /> 
+</head>
+ 
+<body onload="connect();" onunload="disconnect();">
+
+	<h3 id="statusOutput" class="statusOutput"></h3>
+	<textarea id="messagesArea" class="panel message-area" readonly></textarea>
+	<div class="panel input-area">
+		<input id="userName" class="text-field" type="text"
+			placeholder="User name" /> <input id="message" class="text-field"
+			type="text" placeholder="Message"
+			onkeydown="if (event.keyCode == 13) sendMessage();" /> <input
+			type="submit" id="sendMessage" class="button" value="Send"
+			onclick="sendMessage();" /> <input type="button" id="connect"
+			class="button" value="Connect" onclick="connect();" />
+	</div>
+
+
+	<div id="seating-container">
+
+		<div class="centered-text">
+			<p>舞台</p>
+			<div class="act-container">
+				<label> 活動:</label> 
+				<select id="act" disabled>
+					<option value="320">小飛俠</option>
+				</select>
+			</div>
+			<ul class="showcase">
+				<li>
+					<div class="Hseat"></div> <small>可選擇座位</small>
+				</li>
+				<li>
+					<div class="Hseat selected"></div> <small>目前選擇</small>
+				</li>
+				<li>
+					<div class="Hseat sold"></div> <small>已售出</small>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<p class="text">
+		座位數量: <span id="count">0</span> 總金額: <span id="total">0</span>
+	</p>
+	<p>
+		<a href="#">確認購買</a>
+		<button class="cart">Add to cart</button>
+	</p>
+	</div>
+	<script>
+	
+	
+	</script>
+</body>
+
+<script>
+
+	var MyPoint = "/WebSocketChatWeb/seatTest";
+	var host = window.location.host;
+	var path = window.location.pathname;
+	var webCtx = path.substring(0, path.indexOf('/', 1));
+	var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+	var otherSelectedSeats = [];
+	
+	var statusOutput = document.getElementById("statusOutput");
+	var webSocket;
+	//載入頁面先啟動
+	
+
+	//載入頁面先啟動
+	function connect() {
+		// create a websocket
+		webSocket = new WebSocket(endPointURL);
+
+		webSocket.onopen = function(event) {
+			updateStatus("WebSocket Connected");
+			document.getElementById('sendMessage').disabled = false;
+			document.getElementById('connect').disabled = true;
+			
+		   
+		 //  var requestData = {
+		       //     type: 'requestSeatData',
+		      //  };
+
+		    //傳送需要數據要求
+		  //  webSocket.send(JSON.stringify(requestData));
+		    
+		    /*redis 測試接收*/
+		  
+			 /*redis 測試接收*/
+		};
+
+		webSocket.onmessage = function (event) {
+		    var userName = inputUserName.value.trim();
+		    var messageData = JSON.parse(event.data);
+		    console.log(messageData.length)
+		    console.log(messageData.seatNumber)
+		    for(var i = 0; i < messageData.length ; i++ ){
+		    if (messageData[i].seatType === "buy") {
+		    	console.log("鏡來了 鏡來了 幻離境來了")
+		    	console.log(messageData[i]);
+		        otherSelectedSeats.push(messageData[i]);
+		    	otherSelectedSeats.forEach(function (seatObject) {
+		            var seatNumber = seatObject.seatNumber;
+		            console.log(seatNumber);
+		            var seatElements = document.querySelectorAll('[data-seat-number="' + seatNumber + '"]');
+		           
+		            seatElements.forEach(function (seatElement) {
+		            	console.log( messageData[i].seatType+"你要的東西在這~");
+		                if (seatElement.dataset.userName !== userName ) {
+		                	console.log(messageData[i].seatType)
+		                    seatElement.classList.add("otherSelected");
+		                	console.log("我加的啦!!!!!!")
+		                }
+		            });
+		        });
+		    }else if(messageData[i].seatType === "soldOut"){
+		        console.log("矮由 不錯喔");
+		        console.log(messageData);
+		        otherSelectedSeats.push(messageData[i]);
+		        otherSelectedSeats.forEach(function (seatObject) {
+		            var seatNumber = seatObject.seatNumber;
+		            console.log(seatNumber);
+		            var seatElements = document.querySelectorAll('[data-seat-number="' + seatNumber + '"]');
+		            
+		            seatElements.forEach(function (seatElement) {
+		                if (seatElement.dataset.userName !== userName && !seatElement.classList.contains("otherSelected") ) {
+		                    seatElement.classList.add("sold");
+		                    seatElement.classList.remove("selected");
+		                   
+		                }
+		            });
+		        });
+		    }
+		    }
+		 /*   if (userName === "") {
+		        alert("請輸入");
+		        inputUserName.focus();
+		        return;
+		    }*/
+
+		    console.log("收到", event.data);
+
+		    var messagesArea = document.getElementById("messagesArea");
+		    try {
+		        var jsonArray = JSON.parse(event.data);
+		        console.log(jsonArray.userType)
+		         console.log(jsonArray.userName)
+		        if (jsonArray.type === "cancel") {
+		            // 如果 seatType 是 "cancel"，陣列移除
+		            var indexToRemove = otherSelectedSeats.findIndex(function(item) {
+		                return item.seatNumber === jsonArray.seatNumber;
+		            });
+		            if (indexToRemove !== -1) {
+		                otherSelectedSeats.splice(indexToRemove, 1);
+		            }
+		        } else if (jsonArray.userType === "disconnect" && jsonArray.seatType != "soldOut"){  //是disconnect 就刪除
+		        	 var disconnectedUserName = jsonArray.userName;
+		        	 console.log(disconnectedUserName)
+		        	    
+		        	    var indexesToRemove = [];
+
+		        	  
+		        	    otherSelectedSeats.forEach(function (seatObject, index) {
+		        	        if (seatObject.userName === disconnectedUserName && seatObject.seatType != "soldOut") {
+		        	        	console.log(index)
+		        	            indexesToRemove.push(index);
+		        	        }
+		        	    });
+
+		        	    //往前移除 從後面開始 以免錯誤
+		        	    for (var i = indexesToRemove.length - 1; i >= 0; i--) {
+		        	    	console.log(otherSelectedSeats)
+		        	        otherSelectedSeats.splice(indexesToRemove[i], 1);
+		        	    }
+		    }else {
+		    	console.log("跑到這啦~QQ")
+		            if (!otherSelectedSeats.includes(jsonArray.seatNumber)) {
+		                otherSelectedSeats.push(jsonArray);
+		            }
+		        }
+		        console.log(otherSelectedSeats);
+
+		        // 有 data-seat-number 元素中移除 "otherSelected" 
+		        var allSeatElements = document.querySelectorAll('.seat[data-seat-number]');
+		        allSeatElements.forEach(function (seatElement) {
+		            seatElement.classList.remove("otherSelected");
+		        });
+				
+				
+		        otherSelectedSeats.forEach(function (seatObject) {
+		            var seatNumber = seatObject.seatNumber;
+		            var seatElements = document.querySelectorAll('[data-seat-number="' + seatNumber + '"]');
+		           
+		            seatElements.forEach(function (seatElement) {
+		            	console.log(seatElement)
+		                if (seatElement.dataset.userName !== userName && seatElement.classList[1] != "sold" ) {
+		                	console.log(seatElement.classList[1])
+		                    seatElement.classList.add("otherSelected");
+		                	console.log("這個總該是我加的啦!!!!!!")
+		                }else if(seatElement.dataset.userName !== userName && seatElement.classList === "sold"){
+		                	 seatElement.classList.remove("otherSelected");
+		                	 seatElement.classList.add("sold");
+		                	 console.log("我刪的啦!!!!!!")
+		                }
+		            });
+		        });
+
+		    } catch (error) {
+		        console.error("JSON錯誤:", error);
+		    }
+		};
+		window.onload = function () {
+		    connect();
+		};
+
+		webSocket.onclose = function(event) {
+			updateStatus("WebSocket Disconnected");
+		};
+	}
+	
+	 
+	  	  
+	  	
+
+	/*window.addEventListener("load", function () {
+  
+		  var seatDivs = document.querySelectorAll(".seat");
+
+		  //  class 改為 "otherSelected"
+		  seatDivs.forEach(function (seat) {
+		    var seatNumber = seat.dataset.seatNumber;
+		    var seatInfo = otherSelectedSeats.find(function (data) {
+		      return data.seatNumber === parseInt(seatNumber);
+		    });
+
+		    if (seatInfo && seatInfo.status === "otherSelected") {
+		      seat.classList.add("otherSelected");
+		    }
+		  });
+		});*/
+	if(userName!=""){
+		connect();
+	}else{
+		disconnect();
+	}
+	//以下為座位相關 以上為 老師範本
+	window.onload = function () {
+        localStorage.removeItem("selectedSeats");
+      };
+      window.addEventListener("unload", function () {
+        localStorage.removeItem("selectedSeats");
+        console.log("發動")
+      }); 
+      
+      /*選座位*/
+      let container = document.getElementById("seating-container");
+
+      let seatNumber = 1;
+
+    /*  function toggleSeatStatus(seatDiv) {
+    	
+        let seatStatus = seatDiv.dataset.status || "unselected";
+       
+	 if ((userName !== "")&&(seatStatus != "sold")&&(seatStatus != "otherSelected")) {
+          if (seatStatus === "unselected") {
+            
+            seatDiv.dataset.status = "selected";
+          } else if (seatStatus === "selected") {
+            
+            seatDiv.dataset.status = "unselected";
+          }
+          
+        }
+      } */
+      
+      //發送測試
+     
+      function toggleSeatStatus(seatDiv) {
+    	  var userName = inputUserName.value.trim();
+  	/*	if (userName === "") {
+  			alert("Input a user name");
+  			inputUserName.focus();
+  			return;
+  		}*/
+    	    let seatStatus = seatDiv.dataset.status || "unselected";
+  		 	var selectElement = document.getElementById("act");
+  	    	var selectedActivity = selectElement.options[selectElement.selectedIndex].text;
+    	    if ((userName !== "") && (seatStatus != "sold") && (seatStatus != "otherSelected")) {
+    	       
+    	        	if ( (seatStatus === "unselected") && seatDiv.classList.contains("seat") && !seatDiv.classList.contains("otherSelected")&&!seatDiv.classList.contains("sold")) {
+    	            seatDiv.dataset.status = "selected";
+    	           
+    	            // 拿到座位號碼
+    	            var userName = inputUserName.value.trim();
+    	            let seatNumber = seatDiv.dataset.seatNumber;
+    	            
+    	            let seatSelection = {
+    	                userName: userName,
+    	                seatNumber: seatNumber,
+    	                type: "buy",
+    	                actID: selectedActivity 
+    	            };
+    	            //  轉為 JSON 字串
+    	            let seatSelectionJSON = JSON.stringify(seatSelection);
+    	            // JSON 字串到伺服器
+    	            sendSeatSelection(seatSelectionJSON);
+    	        	
+    	        } else if ((seatStatus === "selected")&&(seatStatus != "otherSelected")) {
+    	            seatDiv.dataset.status = "unselected";
+    	            
+    	            let seatNumber = seatDiv.dataset.seatNumber;
+    	            
+    	            let canceledSeatSelection = {
+    	                userName: userName,
+    	                seatNumber: seatNumber,
+    	                type : "cancel",
+    	                actID: selectedActivity 
+    	            };
+    	            
+    	            let canceledSeatSelectionJSON = JSON.stringify(canceledSeatSelection);
+    	           
+    	            sendCanceledSeatSelection(canceledSeatSelectionJSON);
+    	        }
+    	    }
+    	}
+
+    	// 發送座位選擇 JSON 字串到伺服器
+    	function sendSeatSelection(seatSelectionJSON) {
+    	  
+    	    if (webSocket.readyState === WebSocket.OPEN) {
+    	        webSocket.send(seatSelectionJSON);
+    	    }
+    	}
+
+    	// 發送取消座位的 JSON 字串到伺服器
+    	function sendCanceledSeatSelection(canceledSeatSelectionJSON) {
+    	   
+    	    console.log(canceledSeatSelectionJSON);
+    	    if (webSocket.readyState === WebSocket.OPEN) {
+    	        webSocket.send(canceledSeatSelectionJSON);
+    	    }
+    	}
+
+    
+
+/*創造*/
+      for (let row = 1; row <= 20; row++) {
+        let rowDiv = document.createElement("div");
+        rowDiv.classList.add("row");
+
+        for (let seatIndex = 1; seatIndex <= 20; seatIndex++) {
+          if (row >= 7 && row <= 14 && seatIndex >= 7 && seatIndex <= 14) {
+            let emptySeatDiv = document.createElement("div");
+            emptySeatDiv.classList.add("seat", "empty-seat");
+            rowDiv.appendChild(emptySeatDiv);
+            seatNumber++;
+          } else {
+            let seatDiv = document.createElement("div");
+            seatDiv.classList.add("seat");
+            seatDiv.textContent = seatNumber;
+            seatDiv.setAttribute("data-seat-number", seatNumber); 
+           // seatDiv.setAttribute("onclick", "connect();");
+            seatDiv.addEventListener("click", () => {
+            	
+              toggleSeatStatus(seatDiv);
+            });
+
+            rowDiv.appendChild(seatDiv);
+            seatNumber++;
+          }
+        }
+
+        container.appendChild(rowDiv);
+      }
+      container.addEventListener("click", (e) => {
+    	  var userName = inputUserName.value.trim();
+    		if (userName === "") {
+    			alert("Input a user name");
+    			inputUserName.focus();
+    			return;
+    		}
+        if (
+          e.target.classList.contains("seat") &&
+          !e.target.classList.contains("sold") &&
+          !e.target.classList.contains("otherSelected")
+        ) {
+          e.target.classList.toggle("selected");
+
+          updateSelectedCount();
+        }
+      });
+
+      let containerW = document.querySelector(".container");
+      let seats = document.querySelectorAll(".row .seat:not(.sold)");
+      let count = document.getElementById("count");
+      let total = document.getElementById("total");
+      let actDiv = document.getElementById("act");
+
+      populateUI();
+
+      let ticketPrice = +actDiv.value;
+
+      function setActData(actIndex, actPrice) {
+        localStorage.setItem("selectedActIndex", actIndex);
+        localStorage.setItem("selectedActPrice", actPrice);
+      }
+
+      // 更新數量跟價錢
+      function updateSelectedCount() {
+        let selectedSeats = document.querySelectorAll(".row .seat.selected");
+
+        let seatsIndex = [...selectedSeats].map((seat) =>
+          [...seats].indexOf(seat)
+        );
+
+        localStorage.setItem("selectedSeats", JSON.stringify(seatsIndex));
+
+        let selectedSeatsCount = selectedSeats.length;
+
+        count.innerText = selectedSeatsCount;
+        total.innerText = selectedSeatsCount * ticketPrice;
+
+        setActData(actDiv.selectedIndex, actDiv.value);
+      }
+
+      // 從 localstorage and populate UI 拿到資料
+      function populateUI() {
+        let selectedSeats = JSON.parse(localStorage.getItem("selectedSeats"));
+
+        if (selectedSeats !== null && selectedSeats.length > 0) {
+          seats.forEach((seat, index) => {
+            if (selectedSeats.indexOf(index) > -1) {
+              console.log(seat.classList.add("selected"));
+            }
+          });
+        }
+
+        let selectedActIndex = localStorage.getItem("selectedActIndex");
+
+        if (selectedActIndex !== null) {
+          actDiv.selectedIndex = selectedActIndex;
+          console.log(selectedActIndex);
+        }
+      }
+      console.log(populateUI());
+
+      actDiv.addEventListener("change", (e) => {
+        ticketPrice = +e.target.value;
+        setActData(e.target.selectedIndex, e.target.value);
+        updateSelectedCount();
+      });
+//選座位 變化
+  /*    container.addEventListener("click", (e) => {
+    	  var userName = inputUserName.value.trim();
+    		if (userName === "") {
+    			alert("Input a user name");
+    			inputUserName.focus();
+    			return;
+    		}
+        if (
+          e.target.classList.contains("seat") &&
+          !e.target.classList.contains("sold") &&
+          !e.target.classList.contains("otherSelected")
+        ) {
+          e.target.classList.toggle("selected");
+
+          updateSelectedCount();
+        }
+      }); */
+
+   //   updateSelectedCount();
+      
+//滑鼠監聽
+      container.addEventListener("mousemove", (event) => {
+        if (event.target.classList.contains("seat")) {
+          let seatNumber1 = event.target.textContent;
+          let rowIndex1 = Math.ceil(seatNumber1 / 20);
+          let seatIndex1 = seatNumber1 % 20 === 0 ? 20 : seatNumber1 % 20;
+
+          let infoSpan = document.getElementById("seat-info");
+          if (!infoSpan) {
+            infoSpan = document.createElement("span");
+            infoSpan.id = "seat-info";
+            infoSpan.style.position = "absolute";
+            infoSpan.style.left = event.pageX + 30 + "px";
+            infoSpan.style.top = event.pageY + "px";
+            document.body.appendChild(infoSpan);
+          } else {
+            infoSpan.textContent = `座位 ${seatNumber1} 在 ${rowIndex1} 排，第 ${seatIndex1} 列`;
+            container.addEventListener("mouseout", () => {
+              infoSpan.remove();
+            });
+            if (event.target.classList.contains("sold")) {
+              infoSpan.textContent = `已售出，座位 ${seatNumber1} 在 ${rowIndex1} 排，第 ${seatIndex1} 列`;
+              container.addEventListener("mouseout", () => {
+                infoSpan.remove();
+              });
+            }
+          }
+        }
+      });
+
+      //   let container = document.getElementById("seating-container");
+
+      //   let seatLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+      //   //座位產生
+      //   for (let row = 1; row <= 20; row++) {
+      //     let rowDiv = document.createElement("div");
+      //     rowDiv.classList.add("row");
+      //     for (let seatIndex = 0; seatIndex < 20; seatIndex++) {
+      //       if (row >= 7 && row <= 14 && seatIndex >= 6 && seatIndex <= 13) {
+      //         // 這裡的座位是要空白的
+      //         let emptySeatDiv = document.createElement("div");
+      //         emptySeatDiv.classList.add("seat", "empty-seat");
+      //         rowDiv.appendChild(emptySeatDiv);
+      //       } else {
+      //         let seatLetter = seatLetters[seatIndex % seatLetters.length];
+      //         let seatId = `${row}${seatLetter}`;
+      //         let seatDiv = document.createElement("div");
+      //         seatDiv.classList.add("seat");
+      //         seatDiv.textContent = seatId;
+      //         rowDiv.appendChild(seatDiv);
+      //       }
+      //     }
+      //     container.appendChild(rowDiv);
+      //   }
+
+      //--------------TEST------------//
+
+      var seatDivs = document.querySelectorAll(".seat");
+
+      seatDivs.forEach(function (seat, index) {
+        seat.id = "seat_" + (index + 1);
+      });
+
+      var seatIdToChange = "seat_100"; //這裡更改號碼
+
+      var seatElement = document.getElementById(seatIdToChange);
+
+      if (seatElement) {
+        seatElement.classList.add("sold");
+      }
+      //--------------TEST------------//
+      
+      //以上為座位相關 以下為 老師範本
+	var inputUserName = document.getElementById("userName");
+	inputUserName.focus();
+		
+	function sendMessage() {
+		var userName = inputUserName.value.trim();
+		if (userName === "") {
+			alert("Input a user name");
+			inputUserName.focus();
+			return;
+		}
+
+		var inputMessage = document.getElementById("message");
+		var message = inputMessage.value.trim();
+
+		if (message === "") {
+			alert("Input a message");
+			inputMessage.focus();
+		} else {
+			var jsonObj = {
+				"userName" : userName,
+				"message" : message,
+				"actID" : actID
+			};
+			webSocket.send(JSON.stringify(jsonObj));
+			inputMessage.value = "";
+			inputMessage.focus();
+		}
+	}
+	
+	function disconnect() {
+				var selectElement = document.getElementById("act");
+	    		var selectedActivity = selectElement.options[selectElement.selectedIndex].text;
+				var userName = inputUserName.value.trim();
+				console.log(userName)
+	            var userType = "disconnect";  
+	            if (userName) {
+	                
+	                var userInfo = {
+	                    userName: userName,
+	                    userType: userType,
+	                    actID : selectedActivity ,	                    
+	                };
+	                var userInfoJSON = JSON.stringify(userInfo);
+	                if (webSocket.readyState === WebSocket.OPEN) {
+	                    webSocket.send(userInfoJSON);
+	                }
+	                webSocket.close();
+	         		document.getElementById('sendMessage').disabled = true;
+	         		document.getElementById('connect').disabled = false;
+	         		document.getElementById('disconnect').disabled = true;
+	    	}
+ 
+	}
+	 /*購買 相關*/
+	 document.addEventListener('DOMContentLoaded', (event) => {
+		 document.querySelector('.cart').addEventListener('click', function () {
+			    var selectElement = document.getElementById("act");
+			    var selectedActivity = selectElement.options[selectElement.selectedIndex].text;
+			    var userName = inputUserName.value.trim();
+			    console.log('有人要買搂~')
+			    const message = {
+			        userName: userName,	      
+			        seatNumber: seatNumber,
+			        type: "soldOut",
+			        actID: selectedActivity,
+			    };
+
+			    var userInfoJSON = JSON.stringify(message);
+
+			    if (webSocket.readyState === WebSocket.OPEN) {
+			        webSocket.send(userInfoJSON);
+			        console.log('傳送成功~');
+			    } else {
+			        console.error('WebSocket is not open. Unable to send message.');
+			    }
+
+			    // 设置 userType 为 "buyAc"
+			    userType = "buyAc";
+
+			    // 在购买成功后，可以执行其他操作
+			    // 例如，向服务器发送购买请求并更新数据
+
+			});
+
+	 });
+
+	 /*購買 相關*/
+	
+	
+	function updateStatus(newStatus) {
+		statusOutput.innerHTML = newStatus;
+	}
+	
+</script>
+</html>

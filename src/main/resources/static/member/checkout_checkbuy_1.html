@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: rgb(250, 248, 248);">
+
+<head>
+	<title>NewVew-CheckOut</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.png" />
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!--===============================================================================================-->
+	<style>
+		.outercontainer {
+			transform: scale(0.8);
+			transform-origin: top center;
+		}
+
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+
+		button {
+			outline: none;
+			border: none;
+			background: transparent;
+			cursor: pointer;
+		}
+
+		#myInput {
+			padding: 20px;
+			margin-top: -6px;
+			border: 0;
+			border-radius: 0;
+			background: #f1f1f1;
+		}
+
+		.header-v3 {
+			background-image: black;
+		}
+
+		.card {
+			overflow: hidden;
+		}
+
+		.row {
+			margin: 5px;
+			/* 假设原始间距为20px */
+		}
+	</style>
+</head>
+
+<body class="goto-here" style="background-color: rgb(250, 248, 248);">
+
+
+	<!-- Header -->
+	<header class="header-v3" style=" background-color: black;">
+		<!-- Header desktop -->
+		<div class="container-menu-desktop trans-03">
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop p-l-45">
+					<!-- Logo desktop -->
+					<a href="./home-03.html" class="logo" style="color: white; font-size: large; font-weight: bold">
+						<!-- <img src="images/icons/logo-02.png" alt="IMG-LOGO"> -->
+						NewView
+					</a>
+
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu" style="font-weight: bold">
+							<li>
+								<a href="home-03.html">主頁</a>
+							</li>
+
+							<li>
+								<a href="product.html">活動專區</a>
+							</li>
+
+							<li class="label1" data-label1="hot">
+								<a href="shoping-cart.html">購物車</a>
+							</li>
+
+							<li>
+								<a href="forum_home.html">討論區</a>
+							</li>
+
+							<li>
+								<a href="about.html">關於我們</a>
+							</li>
+
+							<li>
+								<a href="contact.html">聯絡我們</a>
+							</li>
+
+							<li>
+								<a href="#">常見問題</a>
+							</li>
+						</ul>
+					</div>
+
+					<!-- Icon header -->
+					<div class="wrap-icon-header flex-w flex-r-m h-full">
+						<div class="flex-c-m h-full p-r-25 bor6">
+							<div class="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 js-show-login">
+								<i class="fa fa-user me-sm-1"></i>
+							</div>
+							<div class="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
+								data-notify="2">
+								<i class="zmdi zmdi-shopping-cart"></i>
+							</div>
+						</div>
+
+						<div class="flex-c-m h-full p-lr-19">
+							<div class="icon-header-item cl0 hov-cl1 trans-04 p-lr-11 js-show-sidebar">
+								<i class="zmdi zmdi-menu"></i>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap-header-mobile">
+			<!-- Logo moblie -->
+			<div class="logo-mobile">
+				<a href="home-03.html" style="color: black; font-size: large; font-weight: bold">
+					<!-- <img src="images/icons/logo-01.png" alt="IMG-LOGO"/> -->
+					NewView
+				</a>
+			</div>
+
+			<!-- Icon header -->
+			<div class="wrap-icon-header flex-w flex-r-m h-full m-r-15">
+				<div class="flex-c-m h-full p-r-5">
+					<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-login">
+						<i class="fa fa-user me-sm-1"></i>
+					</div>
+					<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart"
+						data-notify="2">
+						<i class="zmdi zmdi-shopping-cart"></i>
+					</div>
+				</div>
+			</div>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+				<span class="hamburger-box">
+					<span class="hamburger-inner"></span>
+				</span>
+			</div>
+		</div>
+
+		<!-- Menu Mobile -->
+		<div class="menu-mobile">
+			<ul class="main-menu-m" style="font-weight: bold">
+				<!-- <li>
+		<a href="index.html">Home</a>
+		<ul class="sub-menu-m">
+		  <li><a href="index.html">Homepage 1</a></li>
+		  <li><a href="home-02.html">Homepage 2</a></li>
+		  <li><a href="home-03.html">Homepage 3</a></li>
+		</ul>
+		<span class="arrow-main-menu-m">
+		  <i class="fa fa-angle-right" aria-hidden="true"></i>
+		</span>
+	  </li> -->
+				<li>
+					<a href="home-03.html">主頁</a>
+					<span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</span>
+				</li>
+
+				<li>
+					<a href="product.html">活動專區</a>
+				</li>
+
+				<li>
+					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">購物車</a>
+				</li>
+
+				<li>
+					<a href="forum_home.html">討論區</a>
+				</li>
+
+				<li>
+					<a href="about.html">關於我們</a>
+				</li>
+
+				<li>
+					<a href="contact.html">聯絡我們</a>
+				</li>
+
+				<li>
+					<a href="#">常見問題</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Modal Search -->
+		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<button class="flex-c-m btn-hide-modal-search trans-04">
+				<i class="zmdi zmdi-close"></i>
+			</button>
+
+			<form class="container-search-header">
+				<div class="wrap-search-header">
+					<input class="plh0" type="text" name="search" placeholder="Search..." />
+
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+				</div>
+			</form>
+		</div>
+	</header>
+
+	<!-- Sidebar -->
+	<aside class="wrap-sidebar js-sidebar">
+		<div class="s-full js-hide-sidebar"></div>
+
+		<div class="sidebar flex-col-l p-t-22 p-b-25">
+			<div class="flex-r w-full p-b-30 p-r-27">
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-sidebar">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+
+			<div class="sidebar-content flex-w w-full p-lr-65 js-pscroll">
+				<ul class="sidebar-link w-full">
+					<!-- <li class="p-b-13">
+		  <a href="index.html" class="stext-102 cl2 hov-cl1 trans-04">
+			Home
+		  </a>
+		</li> -->
+					<li class="p-b-13">
+						<a href="home-03.html" class="stext-102 cl2 hov-cl1 trans-04"> 主頁 </a>
+					</li>
+
+					<li class="p-b-13">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04"> 我的最愛 </a>
+					</li>
+
+					<li class="p-b-13">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04"> 會員中心 </a>
+					</li>
+
+					<li class="p-b-13">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04"> 訂單查詢 </a>
+					</li>
+
+					<li class="p-b-13">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04"> Refunds </a>
+					</li>
+
+					<li class="p-b-13">
+						<a href="#" class="stext-102 cl2 hov-cl1 trans-04"> Help & FAQs </a>
+					</li>
+				</ul>
+
+				<div class="sidebar-gallery w-full p-tb-30">
+					<span class="mtext-101 cl5"> @ NewView </span>
+
+					<div class="flex-w flex-sb p-t-36 gallery-lb">
+						<!-- item gallery sidebar -->
+						<div class="wrap-item-gallery m-b-10">
+							<a class="item-gallery bg-img1" href="https://picsum.photos/200" data-lightbox="gallery"
+								style="background-image: url('https://picsum.photos/200')"></a>
+						</div>
+
+						<!-- item gallery sidebar -->
+						<div class="wrap-item-gallery m-b-10">
+							<a class="item-gallery bg-img1" href="https://picsum.photos/200" data-lightbox="gallery"
+								style="background-image: url('https://picsum.photos/200')"></a>
+						</div>
+
+						<!-- item gallery sidebar -->
+						<div class="wrap-item-gallery m-b-10">
+							<a class="item-gallery bg-img1" href="https://picsum.photos/200" data-lightbox="gallery"
+								style="background-image: url('https://picsum.photos/200')"></a>
+						</div>
+
+						<!-- item gallery sidebar -->
+						<div class="wrap-item-gallery m-b-10">
+							<a class="item-gallery bg-img1" href="https://picsum.photos/200" data-lightbox="gallery"
+								style="background-image: url('https://picsum.photos/200')"></a>
+						</div>
+
+						<!-- item gallery sidebar -->
+						<div class="wrap-item-gallery m-b-10">
+							<a class="item-gallery bg-img1" href="https://picsum.photos/200" data-lightbox="gallery"
+								style="background-image: url('https://picsum.photos/200')"></a>
+						</div>
+
+						<!-- item gallery sidebar -->
+						<div class="wrap-item-gallery m-b-10">
+							<a class="item-gallery bg-img1" href="https://picsum.photos/200" data-lightbox="gallery"
+								style="background-image: url('https://picsum.photos/200')"></a>
+						</div>
+
+						<!-- item gallery sidebar -->
+						<div class="wrap-item-gallery m-b-10">
+							<a class="item-gallery bg-img1" href="https://picsum.photos/200" data-lightbox="gallery"
+								style="background-image: url('https://picsum.photos/200')"></a>
+						</div>
+
+						<!-- item gallery sidebar -->
+						<div class="wrap-item-gallery m-b-10">
+							<a class="item-gallery bg-img1" href="https://picsum.photos/200" data-lightbox="gallery"
+								style="background-image: url('https://picsum.photos/200')"></a>
+						</div>
+
+						<!-- item gallery sidebar -->
+						<div class="wrap-item-gallery m-b-10">
+							<a class="item-gallery bg-img1" href="https://picsum.photos/200" data-lightbox="gallery"
+								style="background-image: url('https://picsum.photos/200')"></a>
+						</div>
+					</div>
+				</div>
+
+				<div class="sidebar-gallery w-full">
+					<span class="mtext-101 cl5"> About Us </span>
+
+					<p class="stext-108 cl6 p-t-27">
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur maximus vulputate hendrerit.
+						Praesent faucibus erat vitae rutrum gravida. Vestibulum tempus mi enim, in molestie sem
+						fermentum quis.
+					</p>
+				</div>
+			</div>
+		</div>
+	</aside>
+
+	<!-- Cart -->
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2"> Your Cart </span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/act.jpg" alt="IMG" />
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04"> White Shirt Pleat </a>
+
+							<span class="header-cart-item-info"> 1 x $19.00 </span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/act.jpg" alt="IMG" />
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04"> Converse All Star </a>
+
+							<span class="header-cart-item-info"> 1 x $39.00 </span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/act.jpg" alt="IMG" />
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04"> Nixon Porter Leather </a>
+
+							<span class="header-cart-item-info"> 1 x $17.00 </span>
+						</div>
+					</li>
+				</ul>
+
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">Total: $75.00</div>
+
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="shoping-cart.html"
+							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart </a>
+
+						<a href="shoping-cart.html"
+							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10"> Check Out
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Title page -->
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('./img/black-bar.png');">
+		<h2 class="ltext-105 cl0 txt-center">
+
+		</h2>
+	</section>
+
+	<!-- ===================================  AJAX 渲染開始  ==================================== -->
+	<script>
+		var order = sessionStorage.getItem("order");
+		var orderArray = JSON.parse(order); // yourReceivedData 是您從伺服器端收到的 JSON 字串
+		console.log(orderArray); // 確認解析後的物件陣列是否正確
+		var userID = orderArray[0].userID;
+		console.log(userID);
+
+
+		// 發送請求到Server
+		$.ajax({
+			type: "GET",
+			url: `GetOrderListServlet`,
+			dataType: "json",
+			success: function (data) {
+				console.log(data);
+				$('#userID').val(data.userID);
+				$('#orderName').val(data.userName);
+				$('#orderBirth').val(data.userBirth);
+				$('#orderTel').val(data.userCell);
+				$('#orderMail').val(data.userEmail);
+			},
+			error: function (error) {
+				console.error('There was a problem with the AJAX request:', error);
+			}
+		});
+
+	</script>
+	<!--------------------------------------- section1 ------------------------------------>
+	<div class="outercontainer">
+		<div class="ftco-section p-t-90">
+			<div class="hero-wrap hero-bread" style="background-image: url('images/bg_6.jpg');">
+				<div class="container">
+					<div class="row no-gutters slider-text align-items-center justify-content-center">
+						<div class="col-md-9 ftco-animate text-center">
+							<h1 class="mb-0 bread">CheckOut-確認購買資訊</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="container">
+				<div class="card mb-4 bg-white rounded shadow-sm">
+					<div class="row justify-content-center p-t-30 p-b-35">
+						<div class="col-xl-10 ftco-animate">
+							<div>
+								<h4 class="mb-4 billing-heading p-t-30" style="font-weight: bold; text-align: center;">
+									基本資訊確認</h3>
+									<hr style=" border-top: 2px solid lightgray;">
+							</div>
+							<form id="orderForm" action="#" class="billing-form">
+								<br>
+								<br>
+								<h4 class="mb-4 billing-heading" style="font-weight: bold;">訂購人資訊</h3>
+									<div class="row align-items-end">
+										<div class="col-md-2">
+											<div class="form-group">
+												<label for="userID">會員代號</label>
+												<input id="userID" type="text" class="form-control"
+													placeholder="預設UserID" readonly>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="orderName">姓名</label>
+												<input id="orderName" type="text" class="form-control"
+													placeholder="預設姓名" readonly>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label for="orderBirth">生日</label>
+												<input id="orderBirth" type="text" class="form-control"
+													placeholder="預設生日" readonly>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="orderTel">聯絡方式(手機/電話)</label>
+												<input id="orderTel" type="text" class="form-control"
+													placeholder="預設連絡電話" readonly>
+											</div>
+										</div>
+										<div class="w-100"></div>
+										<div class="col-md-12">
+											<div class="form-group">
+												<label for="orderMail">電子郵件</label>
+												<input id="orderMail" type="text" class="form-control"
+													placeholder="預設信箱" readonly>
+											</div>
+										</div>
+									</div>
+									<br>
+									<br>
+
+									<h4 class="mb-4 billing-heading" style="font-weight: bold;">取票人資訊</h4>
+
+									<div>
+										<div class="form-inline align-items-center">
+											<input type="checkbox" id="copyInfo">
+											<label for="copyInfo" class="form-check-label">同訂購人</label>
+										</div>
+										<br>
+										<div class="row align-items-end">
+											<div class="col-md-2">
+												<div class="form-group">
+													<label for="recipientuserID">會員代號</label>
+													<input id="recipientuserID" type="text" class="form-control"
+														placeholder="請輸入UserID" require>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<label for="firstname">姓名</label>
+													<input id="recipientName" type="text" class="form-control"
+														placeholder="請輸入姓名" require>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="form-group">
+													<label for="lastname">生日</label>
+													<input id="recipientBirth" type="text" class="form-control"
+														placeholder="請輸入生日" require>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label for="lastname">聯絡方式(手機/電話)</label>
+													<input id="recipientTel" type="text" class="form-control"
+														placeholder="請輸入連絡電話" require>
+												</div>
+											</div>
+											<div class="w-100"></div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label for="country">電子郵件</label>
+													<input id="recipientMail" type="text" class="form-control"
+														placeholder="請輸入信箱" require>
+												</div>
+											</div>
+										</div>
+									</div>
+									<br>
+									<br>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--------------------------------------- section1 JS ------------------------------------>
+
+	<script>
+
+		document.getElementById("copyInfo").addEventListener("change", function () {
+			if (this.checked) {
+				// 複製訂購人信息到收件人信息
+				document.getElementById("recipientuserID").value = document.getElementById("userID").value;
+				document.getElementById("recipientName").value = document.getElementById("orderName").value;
+				document.getElementById("recipientBirth").value = document.getElementById("orderBirth").value;
+				document.getElementById("recipientTel").value = document.getElementById("orderTel").value;
+				document.getElementById("recipientMail").value = document.getElementById("orderMail").value;
+			} else {
+				// 清空收件人信息
+				document.getElementById("recipientuserID").value = "";
+				document.getElementById("recipientName").value = "";
+				document.getElementById("recipientBirth").value = "";
+				document.getElementById("recipientTel").value = "";
+				document.getElementById("recipientMail").value = "";
+			}
+		});
+
+	</script>
+
+
+	<!--------------------------------------- section2 活動資訊確認------------------------------------>
+
+	<div class="outercontainer" style="margin-top: -200px;">
+		<div class="ftco-section" style="background-color: rgb(250, 248, 248);">
+			<div class="container" style="padding-bottom: 5px;">
+				<div class="card mb-4 bg-white rounded shadow-sm p-t-30">
+					<div class="row justify-content-center">
+						<div class="col-xl-10 ftco-animate">
+							<div>
+								<h4 class="mb-4 billing-heading p-t-30" style="font-weight: bold; text-align: center;">
+									訂單明細確認</h3>
+									<hr style=" border-top: 2px solid lightgray;">
+							</div>
+							<form class="bg0 p-t-30 p-b-30">
+								<div class="row">
+									<div>
+										<h4 class="mb-4 p-t-30 billing-heading" style="font-weight: bold;">訂購活動場次資訊</h4>
+									</div>
+									<div class="bg0 p-t-30 p-b-30" style="width: 100%; margin-top: -20px;">
+										<div class="wrap-table-shopping-cart">
+											<table class="table-shopping-cart">
+												<tr class="table_head">
+													<th class="column-1" style="font-size: large;">活動名稱</th>
+													<th class="column-2" style="font-size: large;"></th>
+													<th class="column-3" style="font-size: large;">單價</th>
+													<th class="column-4" style="font-size: large;text-align: center;">數量
+													</th>
+													<th class="column-5" style="font-size: large;">總額</th>
+												</tr>
+												<tbody id="table-body">
+													<!--動態產出-->
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<!------------------------------------------- 座位資訊確認 -------------------------------------------->
+								<div>
+									<h4 class="mb-4 p-t-30 billing-heading" style="font-weight: bold;">活動場次座位資訊</h4>
+
+									<div id="card-container">
+										<!--動態產出-->
+									</div>
+
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ===================================  Section2 渲染開始  ==================================== -->
+	<script>
+		var order = sessionStorage.getItem("order");
+		var jsonData = JSON.parse(order); // 從伺服器端收到的 JSON 字串
+		const tableBody = document.getElementById('table-body'); // 取得表格的 tbody
+
+		// 遍歷 JSON 陣列中的每個物件並將資料插入 HTML 表格
+		jsonData.forEach((item, index) => {
+
+			const row = document.createElement('tr');
+			row.classList.add('table_row');
+			row.innerHTML = `
+			<td class="column-1">
+			  <div class="how-itemcart1">
+				<img src="images/act.jpg" alt="IMG">
+			  </div>
+			</td>
+			<td class="column-2">${item.actName}</td>
+			<td class="column-3 num-price">$${item.actPrice}</td>
+			<td class="column-4" style="font-size: large;text-align: center;">${item.actCount}</td>
+			<td class="column-5 num-total">$${item.actPriceTotal}</td>
+		  `;
+			tableBody.appendChild(row);
+		});
+	</script>
+
+
+	<script>
+		var order = sessionStorage.getItem("order");
+		var jsonData = JSON.parse(order); // JSON data received from the server
+		var cardContainer = document.getElementById('card-container');
+
+		jsonData.forEach((item, index) => {
+			var cardDiv = document.createElement('div');
+			cardDiv.classList.add('card', 'mb-4', 'bg-white', 'rounded', 'shadow-sm', 'p-t-30', 'p-b-30');
+			cardDiv.innerHTML = `
+            <div class="row align-items-end">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="actID">活動代號</label>
+                        <input id="actID" type="text" class="form-control" value="${item.actID}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="actName">活動名稱</label>
+                        <input id="orderTel" type="text" class="form-control" value="${item.actName}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="startTime">活動日期</label>
+                        <input id="orderName" type="text" class="form-control" value="${item.actDate}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="lastname">最後退票時間</label>
+                        <input id="orderBirth" type="text" class="form-control" value="${item.actDate}" style="color: red;" readonly>
+                    </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="country">活動地址</label>
+                        <input id="orderMail" type="text" class="form-control" value="${item.cityAddress}" readonly>
+                    </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="country">座位清單</label>
+                        <div>
+                        ${(() => {
+					const regex = /第 \d+排,第 \d+列/g;
+					const seats = item.seatRowsColumns.match(regex);
+					return seats.map((seat, i) => `<p>座位${i + 1}<input id="seat${i + 1}" type="text" class="form-control" value="${seat}" readonly></p>`).join('');
+				})()}
+                    </div>
+                    </div>
+                </div>
+            </div>
+        `;
+			cardContainer.appendChild(cardDiv);
+		});
+	</script>
+
+
+
+	<!--------------------------------------- section3 結帳資訊確認------------------------------------>
+
+	<div class="outercontainer" style="margin-top: -200px;">
+		<div class="ftco-section" style="background-color: rgb(250, 248, 248);">
+			<div class="container">
+				<div class="card mb-4 bg-white rounded shadow-sm p-b-40">
+					<div class="row justify-content-center p-t-30 p-b-10">
+						<div class="col-xl-10 ftco-animate">
+							<div>
+								<h4 class="mb-4 billing-heading p-t-30" style="font-weight: bold; text-align: center;">
+									付款方式</h3>
+									<hr style=" border-top: 2px solid lightgray;">
+							</div>
+							<form id="orderForm" action="#" class="billing-form">
+								<label for="paymentMethod">選擇結帳方式：</label>
+								<select id="paymentMethod" name="paymentMethod">
+									<option value="creditCard">信用卡</option>
+									<option value="paypal">PayPal</option>
+									<option value="bankTransfer">銀行轉帳</option>
+									<option value="cash">現金</option>
+								</select>
+
+
+								<div class="flex-w flex-sb-m bor15 p-t-5 p-b-5 p-lr-40 p-lr-15-sm">
+									<div class="stext-110 cl2"
+										style="flex-grow: 1; text-align: right; margin-right: 15px;font-size: medium;">
+										原始活動訂單總金額 :
+									</div>
+									<input id="firstPrice"
+										class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
+										name="coupon" placeholder="活動總金額" style="background-color: rgb(248, 244, 244);"
+										readonly>
+								</div>
+								<div class="flex-w flex-sb-m bor15 p-t-5 p-b-5 p-lr-40 p-lr-15-sm">
+									<div class="stext-110 cl2"
+										style="flex-grow: 1; text-align: right; margin-right: 15px;font-size: medium;">
+										廠商優惠碼折抵後金額 :
+									</div>
+									<input id="secondPrice"
+										class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
+										name="coupon" placeholder="活動總金額" style="background-color: rgb(248, 244, 244);"
+										readonly>
+								</div>
+								<hr style=" border-top: 2px solid lightgray;">
+								<div class="flex-w flex-sb-m bor15 p-t-5 p-b-5 p-lr-40 p-lr-15-sm">
+									<button class="stext-110 cl2 "
+										style="flex-grow: 1; text-align: right; margin-right: 15px;font-size: medium;">
+									</button>
+									<button
+										class="flex-c-m stext-101 cl0 size-60 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
+										type="button" id="submitcoupon">使用 NewView 優惠碼
+									</button>
+									<input id="developerPrice"
+										class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
+										name="coupon" placeholder="輸入活動代碼">
+
+								</div>
+								<div class="flex-w flex-sb-m bor15 p-t-5 p-b-5 p-lr-40 p-lr-15-sm">
+									<span class="stext-110 cl2"
+										style="flex-grow: 1; text-align: right; margin-right: 15px;font-size: medium;color: red;">
+										總計折抵金額 :
+									</span>
+									<input id="discountPrice"
+										class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
+										name="coupon" placeholder="折扣總金額" style="background-color: rgb(248, 244, 244);"
+										readonly>
+								</div>
+
+								<div class="flex-w flex-sb-m bor15 p-t-5 p-b-5 p-lr-40 p-lr-15-sm">
+									<span class="stext-110 cl2"
+										style="flex-grow: 1; text-align: right; margin-right: 15px;font-size: 20px;color: rgb(18, 19, 19);">
+										<strong>總金額 :</strong>
+									</span>
+									<input id="totalPrice"
+										class="stext-104 cl2 plh4 size-117 bor13 p-lr-20 m-r-10 m-tb-5" type="text"
+										name="coupon" placeholder="總金額" style="background-color: rgb(248, 244, 244);"
+										readonly>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-------------------------------------------- 送出確認 -------------------------------------------->
+			<div class="container" style="text-align: center;">
+				<button id="orderconfirm" type="submit" class="btn btn-primary py-3 px-4"
+					style="font-size: large;"><strong>確定結帳，前往付款</strong></button>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- ===================================  AJAX 請求discountCode  ==================================== -->
+
+	<script>
+		var order = sessionStorage.getItem("order");
+		var jsonData = JSON.parse(order);
+		var userID = jsonData[0].userID;
+
+		var firstPrice = 0;
+		var secondPrice = 0;
+
+		// 初始化總價格，確保 developerPrice 有值，否則將其設為 0
+		var discountPrice = $('#developerPrice').val();
+		discountPrice = discountPrice ? parseFloat(discountPrice) : 0;
+
+		jsonData.forEach(item => {
+			firstPrice += item.actPriceTotal;
+			secondPrice += item.discount;
+		});
+
+		var totalPrice = firstPrice - discountPrice;
+
+		document.getElementById('firstPrice').value = firstPrice;
+		document.getElementById('secondPrice').value = secondPrice;
+
+		$('#submitcoupon').on('click', function () {
+			var discountCode = $('#developerPrice').val();
+
+			$.ajax({
+				url: 'GetDiscountCode',
+				type: 'GET',
+				data: {
+					"discountCode": discountCode,
+					"userID": userID
+				},
+				success: function (data) {
+					console.log(data);
+					$("#discountPrice").val(data.disAmount.toString());
+
+					// 重新計算總金額
+					var totalPrice = firstPrice - parseFloat(data.disAmount);
+					updateTotalPrices(totalPrice);
+				},
+				error: function (xhr, status, error) {
+					$("#developerPrice").css("color", "red").val("輸入錯誤或此折扣碼不存在");
+					$("#discountPrice").val(0);
+					$("#totalPrice").val(totalPrice);
+				}
+			});
+		});
+
+		// 透過此函數更新總價格
+		function updateTotalPrices(totalPrice) {
+			document.getElementById('totalPrice').value = totalPrice;
+		}
+
+		updateTotalPrices(totalPrice);
+
+
+	</script>
+
+	<!-- ===================================  AJAX 送出訂單確認  ==================================== -->
+
+	<script>
+		$(document).ready(function () {
+
+
+			$('#orderconfirm').on('click', function () {
+				var order = sessionStorage.getItem("order");
+				var orderArray = JSON.parse(order); 
+				console.log(orderArray);
+
+				var discount = $("#discountPrice").val();
+				var discountprice = $("#totalPrice").val();
+				var recipientuserID = $("#recipientuserID").val();
+				
+				$.ajax({
+					url: 'ConfirmUpdateOrder',
+					type: 'POST',
+					data: {
+						"orderData": order,
+						"discount": discount,
+						"discountprice": discountprice,
+						"recipientuserID": recipientuserID
+					},
+					success: function (data) {
+						console.log(data);
+						window.location.href = "checkout_thankupage.html";
+					},
+					error: function (xhr, status, error) {
+						console.error('There was a problem with the AJAX request:', error);
+					}
+				});
+			});
+		});
+	</script>
+
+	<!--------------------------------------- section3 END ------------------------------------>
+
+
+	<!-- Footer -->
+	<footer class="bg3 p-t-55 p-b-32">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 p-b-20 text-left">
+					<h4 class="stext-301 cl0 p-b-30 text-left">Categories</h4>
+					<ul style="border-right: 1px solid #ccc; padding-right: 20px">
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04 "> 脫口秀 </a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04 "> 講座 </a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04 "> 音樂會 </a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04 "> 舞台劇 </a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04 "> 演唱會 </a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-20 text-left">
+					<h4 class="stext-301 cl0 p-b-30 text-left">Help</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04"> 訂單查詢 </a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04"> 退貨申請 </a>
+						</li>
+
+						<!-- <li class="p-b-10">
+							  <a href="#" class="stext-107 cl7 hov-cl1 trans-04"> Shipping </a>
+						  </li> -->
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04"> FAQs </a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-20">
+					<h4 class="stext-301 cl0 p-b-30 text-left">Newsletter</h4>
+
+					<form>
+						<div class="wrap-input1 w-full p-b-4">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email"
+								placeholder="email@example.com" />
+							<div class="focus-input1 trans-04"></div>
+						</div>
+
+						<div class="p-t-18">
+							<button
+								class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">訂閱電子報</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="col-sm-5 col-lg-3 p-b-20">
+					<h4 class="stext-301 cl0 p-b-30 text-left">Latest Blog Post</h4>
+					<p class="stext-301 cl7 size-201 text-left">Ready to get started?</p>
+					<p class="stext-107 cl7 size-201 text-left">Any questions? Let us know in store at 8th floor, 379
+						Hudson
+						St, New York, NY 10018 or call us on (+1) 96 716 6879</p>
+
+					<div class="p-t-27">
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-instagram"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-pinterest-p"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-t-10">
+				<p class="stext-107 cl6 txt-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>
+						document.write(new Date().getFullYear());
+					</script>
+					All rights reserved | Made with
+					<i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+						target="_blank">Colorlib</a> &amp; distributed by
+					<a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<input type="text" id="username">
+	<br>
+	<input type="password" id="password">
+	<br>
+	<button>LOGIN</button>
+	<br>
+	<img src="" alt="">
+</body>
+<script>
+	const username = document.querySelector('#username');
+	const password = document.querySelector('#password');
+	const img = document.querySelector('img');
+
+	const button = document.querySelector('button');
+	button.addEventListener('click', () => {
+		fetch(`../member2/${username.value}/${password.value}`)
+			.then(resp => resp.json())
+			.then(member => {
+				img.src = `data:image/*;base64, ${member.img}`;
+			});
+	});
+
+</script>
+
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>活動作座位選擇</title>
+
+    <link rel="stylesheet" href="./test.css" />
+  </head>
+  <body>
+    <div id="seating-container">
+      <div class="centered-text">
+        <p>舞台</p>
+        <div class="act-container">
+          <label> 活動:</label>
+          <select id="act" disabled>
+            <option value="320">小飛俠</option>
+          </select>
+        </div>
+        <ul class="showcase">
+          <li>
+            <div class="Hseat"></div>
+            <small>可選擇座位</small>
+          </li>
+          <li>
+            <div class="Hseat selected"></div>
+            <small>目前選擇</small>
+          </li>
+          <li>
+            <div class="Hseat sold"></div>
+            <small>已售出</small>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="text">
+      座位數量: <span id="count">0</span> 總金額: <span id="total">0</span>
+    </p>
+    <p>
+      <a href="../../product.html">確認購買</a>
+      <button class="cart">Add to cart</button>
+    </p>
+
+    <script>
+      window.onload = function () {
+        localStorage.removeItem("selectedSeats");
+      };
+      window.addEventListener("unload", function () {
+        localStorage.removeItem("selectedSeats");
+      });
+      let container = document.getElementById("seating-container");
+
+      let seatNumber = 1;
+      for (let row = 1; row <= 20; row++) {
+        let rowDiv = document.createElement("div");
+        rowDiv.classList.add("row");
+        for (let seatIndex = 1; seatIndex <= 20; seatIndex++) {
+          if (row >= 7 && row <= 14 && seatIndex >= 7 && seatIndex <= 14) {
+            let emptySeatDiv = document.createElement("div");
+            emptySeatDiv.classList.add("seat", "empty-seat");
+            rowDiv.appendChild(emptySeatDiv);
+            seatNumber++;
+          } else {
+            let seatDiv = document.createElement("div");
+            seatDiv.classList.add("seat");
+            seatDiv.textContent = seatNumber;
+
+            let seatStatus = "unselected";
+
+            seatDiv.addEventListener("click", () => {
+              if (seatStatus != "sold") {
+                if (seatStatus === "unselected") {
+                  seatDiv.style.backgroundImage = "";
+                  seatStatus = "selected";
+                } else if (seatStatus === "selected") {
+                  seatDiv.style.backgroundImage = "";
+                  seatStatus = "unselected";
+                }
+              }
+            });
+
+            rowDiv.appendChild(seatDiv);
+            seatNumber++;
+          }
+        }
+        container.appendChild(rowDiv);
+      }
+
+      let seats2 = document.querySelectorAll(".seat"); // 找座位
+
+      seats2.forEach((seat) => {
+        seat.addEventListener("click", () => {
+          if (
+            !seat.classList.contains("sold") &&
+            !seat.classList.contains("selected")
+          ) {
+            let seatNumber = seat.textContent;
+            console.log(`座位 ${seatNumber}`);
+          } else if (seat.classList.contains("selected")) {
+            console.log("cancel");
+          } else {
+            console.log("0");
+          }
+        });
+      });
+
+      let containerW = document.querySelector(".container");
+      let seats = document.querySelectorAll(".row .seat:not(.sold)");
+      let count = document.getElementById("count");
+      let total = document.getElementById("total");
+      let actDiv = document.getElementById("act");
+
+      populateUI();
+
+      let ticketPrice = +actDiv.value;
+
+      function setActData(actIndex, actPrice) {
+        localStorage.setItem("selectedActIndex", actIndex);
+        localStorage.setItem("selectedActPrice", actPrice);
+      }
+
+      // 更新數量跟價錢
+      function updateSelectedCount() {
+        let selectedSeats = document.querySelectorAll(".row .seat.selected");
+
+        let seatsIndex = [...selectedSeats].map((seat) =>
+          [...seats].indexOf(seat)
+        );
+
+        localStorage.setItem("selectedSeats", JSON.stringify(seatsIndex));
+
+        let selectedSeatsCount = selectedSeats.length;
+
+        count.innerText = selectedSeatsCount;
+        total.innerText = selectedSeatsCount * ticketPrice;
+
+        setActData(actDiv.selectedIndex, actDiv.value);
+      }
+
+      // 從 localstorage and populate UI 拿到資料
+      function populateUI() {
+        let selectedSeats = JSON.parse(localStorage.getItem("selectedSeats"));
+
+        if (selectedSeats !== null && selectedSeats.length > 0) {
+          seats.forEach((seat, index) => {
+            if (selectedSeats.indexOf(index) > -1) {
+              console.log(seat.classList.add("selected"));
+            }
+          });
+        }
+
+        let selectedActIndex = localStorage.getItem("selectedActIndex");
+
+        if (selectedActIndex !== null) {
+          actDiv.selectedIndex = selectedActIndex;
+          console.log(selectedActIndex);
+        }
+      }
+      console.log(populateUI());
+
+      actDiv.addEventListener("change", (e) => {
+        ticketPrice = +e.target.value;
+        setActData(e.target.selectedIndex, e.target.value);
+        updateSelectedCount();
+      });
+
+      container.addEventListener("click", (e) => {
+        if (
+          e.target.classList.contains("seat") &&
+          !e.target.classList.contains("sold")
+        ) {
+          e.target.classList.toggle("selected");
+
+          updateSelectedCount();
+        }
+      });
+
+      updateSelectedCount();
+
+      container.addEventListener("mousemove", (event) => {
+        if (event.target.classList.contains("seat")) {
+          let seatNumber1 = event.target.textContent;
+          let rowIndex1 = Math.ceil(seatNumber1 / 20);
+          let seatIndex1 = seatNumber1 % 20 === 0 ? 20 : seatNumber1 % 20;
+
+          let infoSpan = document.getElementById("seat-info");
+          if (!infoSpan) {
+            infoSpan = document.createElement("span");
+            infoSpan.id = "seat-info";
+            infoSpan.style.position = "absolute";
+            infoSpan.style.left = event.pageX + 30 + "px";
+            infoSpan.style.top = event.pageY + "px";
+            document.body.appendChild(infoSpan);
+          } else {
+            infoSpan.textContent = `座位 ${seatNumber1} 在 ${rowIndex1} 排，第 ${seatIndex1} 列`;
+            container.addEventListener("mouseout", () => {
+              infoSpan.remove();
+            });
+            if (event.target.classList.contains("sold")) {
+              infoSpan.textContent = `已售出，座位 ${seatNumber1} 在 ${rowIndex1} 排，第 ${seatIndex1} 列`;
+              container.addEventListener("mouseout", () => {
+                infoSpan.remove();
+              });
+            }
+          }
+        }
+      });
+
+      //   let container = document.getElementById("seating-container");
+
+      //   let seatLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+      //   //座位生成
+      //   for (let row = 1; row <= 20; row++) {
+      //     let rowDiv = document.createElement("div");
+      //     rowDiv.classList.add("row");
+      //     for (let seatIndex = 0; seatIndex < 20; seatIndex++) {
+      //       if (row >= 7 && row <= 14 && seatIndex >= 6 && seatIndex <= 13) {
+      //         // 這裡的座位是要空白的
+      //         let emptySeatDiv = document.createElement("div");
+      //         emptySeatDiv.classList.add("seat", "empty-seat");
+      //         rowDiv.appendChild(emptySeatDiv);
+      //       } else {
+      //         let seatLetter = seatLetters[seatIndex % seatLetters.length];
+      //         let seatId = `${row}${seatLetter}`;
+      //         let seatDiv = document.createElement("div");
+      //         seatDiv.classList.add("seat");
+      //         seatDiv.textContent = seatId;
+      //         rowDiv.appendChild(seatDiv);
+      //       }
+      //     }
+      //     container.appendChild(rowDiv);
+      //   }
+
+      //--------------TEST------------//
+
+      var seatDivs = document.querySelectorAll(".seat");
+
+      seatDivs.forEach(function (seat, index) {
+        seat.id = "seat_" + (index + 1);
+      });
+
+      var seatIdToChange = "seat_100"; //這裡更改號碼
+
+      var seatElement = document.getElementById(seatIdToChange);
+
+      if (seatElement) {
+        seatElement.classList.add("sold");
+      }
+    </script>
+  </body>
+</html>

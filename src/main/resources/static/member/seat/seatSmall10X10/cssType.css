@@ -1,0 +1,185 @@
+* {
+  box-sizing: border-box;
+}
+label,
+p {
+  display: inline-block;
+}
+body {
+  background-color: #242333;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: "Lato", sans-serif;
+  margin: 0;
+}
+
+.act-container {
+  margin: 20px 0;
+  color: #fff;
+}
+
+.act-container select {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  color: aqua;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-left: 10px;
+  padding: 5px 15px 5px 15px;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.container {
+  perspective: 1000px;
+  margin-bottom: 30px;
+}
+
+.seat {
+  background-color: rgba(0, 0, 0, 0);
+  height: 24px;
+  width: 37px;
+  margin: 3px;
+  margin-left: 10px;
+  /* border: 1px solid #fff; */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: table-cell;
+  text-align: center; /* 水平居中 */
+  vertical-align: middle; /* 垂直居中 */
+  background-image: url("../img/couch-solid.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.seat p {
+  pointer-events: none;
+  font-size: 9px;
+}
+
+.Hseat {
+  background-color: #000000;
+  height: 45px;
+  width: 50px;
+  margin: 3px;
+  font-size: 50px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: 10px;
+}
+.seat p.font_s {
+  font-size: 15px;
+  align-items: center;
+  margin-left: 10px;
+  pointer-events: none;
+}
+
+.Hseat.selected {
+  background-color: green;
+}
+
+.Hseat.sold {
+  background-color: #e40f0f;
+}
+
+.seat.selected {
+  background-color: rgb(251, 254, 251);
+}
+
+.seat.sold {
+  background-color: #f7f7f7;
+}
+
+.row {
+  display: flex;
+  margin-right: 18px;
+}
+.seat:nth-of-type(3) {
+  margin-right: 60px;
+}
+
+.seat:nth-last-of-type(3) {
+  margin-left: 60px;
+}
+
+.seat:not(.sold):hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.showcase .seat:not(.sold):hover {
+  cursor: default;
+  transform: scale(1);
+}
+
+.showcase {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #777;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.showcase li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+.showcase li small {
+  margin-left: 2px;
+}
+
+.screen {
+  background-color: #fff;
+  height: 120px;
+  width: 100%;
+  margin: 15px 0;
+  transform: rotateX(-48deg);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+}
+
+p.text {
+  margin: 5px 0;
+}
+
+p.text span {
+  color: green;
+}
+
+p a {
+  border: 1px solid #fff;
+  color: #000000;
+  background-color: #fff;
+  border-radius: 5px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.selected {
+  background-image: url("../img/couch-solid-green_0.png");
+}
+
+.sold {
+  background-image: url("../img/couch-solid-red_0.png");
+}
+
+#seat-info {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: antiquewhite;
+  color: black;
+  padding: 5px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  z-index: 9999;
+}

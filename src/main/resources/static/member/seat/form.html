@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./cssType2.css" /> 
+    <style>
+      dialog {
+        border: none;
+        box-shadow: 0 2px 6px #ccc;
+        border-radius: 10px;
+      }
+      dialog::backdrop {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <button id="show">show</button>
+    <dialog id="infoModal" class="dio">
+      <div class="act-container">
+        <label> 活動:</label>
+        <select id="act" disabled>
+          <option value="220" disabled>小飛俠</option>
+        </select>
+      </div>
+
+      <ul class="showcase">
+        <li>
+          <div class="seat"></div>
+          <small>可選擇座位</small>
+        </li>
+        <li>
+          <div class="seat selected"></div>
+          <small>目前選擇</small>
+        </li>
+        <li>
+          <div class="seat sold"></div>
+          <small>已售出</small>
+        </li>
+      </ul>
+      <div class="container">
+        <div class="screen"></div>
+
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat sold"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+        <div class="row">
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat sold"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+          <div class="seat"></div>
+        </div>
+      </div>
+
+      <p class="text">
+        座位數量: <span id="count">0</span> 總金額<span id="total">0</span>
+      </p>
+      <button id="close">close</button>
+
+      <script src="./SEAT.js"></script>
+    </dialog>
+
+    <script>
+      let btn = document.querySelector("#show");
+      let infoModal = document.querySelector("#infoModal");
+      let close = document.querySelector("#close");
+      btn.addEventListener("click", function () {
+        infoModal.showModal();
+      });
+      close.addEventListener("click", function () {
+        infoModal.close();
+      });
+    </script>
+  </body>
+</html>
