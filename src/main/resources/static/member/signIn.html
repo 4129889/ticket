@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Sign-in</title>
@@ -214,7 +214,7 @@
           function redirect(data) {
             console.log(data);
             alert("帳號已登出，畫面將轉導至首頁");
-            location.href = "home-03.html";
+            location.href = "home.html";
           }
         });
       </script>
@@ -628,7 +628,7 @@
       var webCtx = path.substring(0, path.indexOf("/", 1));
       const END_POINT_URL = "http://" + HOST + webCtx;
       const COLLECTION_POINT = "/SignIn";
-
+	console.log(path);
       $("#signIn #commit").on("click", function (e) {
         // 停止點擊預設事件
         e.preventDefault();
@@ -664,6 +664,9 @@
           error: function (xhr) {
             console.log("error");
             console.log(xhr);
+            console.log("Status Code:", xhr.status);  // 打印狀態碼
+            console.log("Error Message:", xhr.statusText);  // 打印錯誤訊息
+            console.log(xhr.responseText);  // 打印伺服器回應的詳細訊息
           },
           complete: function (xhr) {
             console.log("complete");
